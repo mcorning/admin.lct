@@ -49,7 +49,7 @@ export default {
       },
 
       {
-        label: 'Abount',
+        label: 'About',
         url: '/about'
       }
     ]
@@ -58,7 +58,11 @@ export default {
     toggleTheme() {
       this.$vuetify.theme.themes.dark.anchor = '#41B883';
       this.$vuetify.theme.dark = !this.$vuetify.theme.dark;
+      localStorage.setItem('theme', this.$vuetify.theme.dark);
     }
+  },
+  mounted() {
+    this.$vuetify.theme.dark = localStorage.getItem('theme');
   }
 };
 </script>

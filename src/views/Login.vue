@@ -21,7 +21,7 @@
       <v-snackbar v-model="snackBar" :timeout="10000" color="primary" multi-line vertical centered>
         {{ message }}
         <template v-slot:action="{ attrs }">
-          <v-btn color="white" text v-bind="attrs" @click="snackBar = false">
+          <v-btn color="white" text v-bind="attrs" to="admin" @click="snackBar = false">
             Thanks
           </v-btn>
         </template>
@@ -73,10 +73,7 @@ export default {
     }
   },
   mounted() {
-    const q = JSON.parse(localStorage.getItem(this.key));
-    if (q) {
-      this.query = q;
-    }
+    this.query = JSON.parse(localStorage.getItem(this.key)) || { admin: '', id: '', nsp: '' };
     console.log('getting:', JSON.stringify(this.query, null, 3));
     if (this.query) {
       this.login();
