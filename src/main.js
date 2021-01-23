@@ -1,4 +1,5 @@
 import config from '@/config.json';
+import SoteriaIcon from './components/svg/safeInSistersLogo.vue';
 
 import Vue from 'vue';
 import App from './App.vue';
@@ -16,7 +17,14 @@ let url = process.env.NODE_ENV == 'development' ? config.ioServerUrl : config.ng
 const key = 'query';
 // localStorage.removeItem(key);
 
+Vue.component('soteria-icon', SoteriaIcon);
+
 const options = JSON.parse(localStorage.getItem(key));
+if (options.nsp) {
+  url += options.nsp;
+}
+
+console.log(url);
 
 Vue.use(
   new VueSocketIO({

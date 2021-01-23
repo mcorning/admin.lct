@@ -6,8 +6,21 @@
       </v-card-title>
       <v-card-text>
         <v-form>
-          <v-text-field v-model="query.admin" label="Username" :prepend-icon="statusIcon" />
-          <v-text-field v-model="query.nsp" label="Locale" prepend-icon="mdi-account-circle" />
+          <v-text-field
+            v-model="query.admin"
+            label="Nickname"
+            :prepend-icon="statusIcon"
+            hide-details
+          />
+          <v-banner>Use any name you want.</v-banner>
+          <v-text-field
+            v-model="query.nsp"
+            label="Purview"
+            prepend-icon="mdi-account-circle"
+            hide-details
+          />
+          <v-banner>This controls what LCT messages you can see.</v-banner>
+
           <v-text-field
             v-model="query.id"
             :type="showPassword ? 'text' : 'password'"
@@ -15,7 +28,11 @@
             prepend-icon="mdi-lock"
             :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
             @click:append="showPassword = !showPassword"
+            hide-details
           />
+          <v-banner
+            >Your mobile number is your unique LCT ID (for notifications, if you choose).</v-banner
+          >
         </v-form>
       </v-card-text>
       <v-snackbar v-model="snackBar" :timeout="10000" color="primary" multi-line vertical centered>
@@ -59,6 +76,7 @@ export default {
       this.message = `You are connected with socket ${this.$socket.id} `;
       this.statusIcon = 'mdi-lan-connect';
       this.snackBar = true;
+      this.$socket.emit('message', 'TESTING ADMIN');
     }
   },
   methods: {
